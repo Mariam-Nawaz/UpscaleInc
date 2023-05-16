@@ -1,0 +1,47 @@
+﻿
+
+@page "/View"
+@inject HttpClient Http
+@using upscaleInc.Shared;
+<html>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Comment</th>
+        <th>phone#</th>
+      </tr>
+        <tbody>
+            @foreach (var cust in customer)
+            {
+                <tr>
+                    <td>@cust.email</td>
+                    <td>@cust.Name</td>
+                    <td>@cust.comment</td>
+                    <td>@cust.Phn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+  </body>
+</html>
+
+@code {
+    private customer_reviews[]? customer;
+    protected override async Task OnInitializedAsync()
+    {
+        customer = await Http.GetFromJsonAsync<customer_reviews[]>("viewcomment");
+    }
+
+    
+}

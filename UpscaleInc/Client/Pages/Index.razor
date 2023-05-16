@@ -1,0 +1,77 @@
+﻿@page "/"
+@using static System.Net.WebRequestMethods;
+@inject HttpClient Http
+@using Azure.Core;
+@using UpscaleInc.Shared;
+@using upscaleInc.Shared;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #F6F6F6;
+            box-shadow: 0 0 10px 0 #BFBFBF;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+            }
+
+        .btn {
+            background-color: #0F7D79;
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" @bind="u.email" />
+            </div>
+            <div class="form-group">
+                <label for="password">password:</label>
+                <input type="number" class="form-control" id="password" @bind="u.password" />
+            </div>
+   
+            <button type="button" class="btn btn-primary" @onclick="Submit">Save</button>
+        </form>
+
+    </div>
+</body>
+</html>
+
+@code {
+    login u = new login();
+    public async Task Submit()
+    {
+        var response = await Http.PostAsJsonAsync("Login", u);
+        Console.WriteLine(response);
+
+    }
+}
+

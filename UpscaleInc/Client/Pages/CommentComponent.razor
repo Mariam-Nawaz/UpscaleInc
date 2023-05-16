@@ -1,0 +1,56 @@
+﻿@page "/commentpage"
+@inject HttpClient Http;
+@using upscaleInc.Shared;
+<html>
+<head>
+    <style>
+        .container {
+            margin: auto;
+            padding: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .input-field {
+            margin-bottom: 10px;
+        }
+
+        .submit-button {
+            font-weight: bold;
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" @bind="u.email" />
+            </div>
+            <div class="form-group">
+                <label for="name">name:</label>
+                <input type="text" class="form-control" id="name" @bind="u.Name" />
+            </div>
+            <div class="form-group">
+                <label for="phone">comment</label>
+                <input type="text" class="form-control" id="phone" @bind="u.comment" />
+            </div>
+            <button type="button" class="btn btn-primary" @onclick="Submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>
+@code {
+    customer_reviews u = new customer_reviews();
+   
+    public async Task Submit()
+    {
+        Console.WriteLine("mariqm");
+        var response = Http.PostAsJsonAsync("hoojaa", u);
+        Console.WriteLine(response);
+    } 
+}

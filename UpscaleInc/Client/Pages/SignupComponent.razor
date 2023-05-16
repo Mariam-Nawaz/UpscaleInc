@@ -1,0 +1,93 @@
+﻿<h3>SignupComponent</h3>
+@page "/signup"
+@using upscaleInc.Shared;
+@inject HttpClient Http;
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 600px;
+            margin: auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form {
+            padding: 30px;
+            background: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #777;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Sign Up</div>
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" @bind="u.email" />
+            </div>
+            <div class="form-group">
+                <label for="password">password:</label>
+                <input type="password" class="form-control" id="password" @bind="u.Password" />
+            </div>
+            <div class="form-group">
+                <label for="name">name:</label>
+                <input type="text" class="form-control" id="name" @bind="u.Name" />
+            </div>
+            <div class="form-group">
+                <label for="phone">phone:</label>
+                <input type="number" class="form-control" id="phone" @bind="u.Phn" />
+            </div>
+            <button type="button" class="btn btn-primary" @onclick="Submit">Save</button>
+        </form>
+    </div>
+</body>
+
+</html>
+@code {
+    user u = new user();
+    public async Task  Submit()
+    {
+        var response = Http.PostAsJsonAsync("signup", u);
+        Console.WriteLine(response);
+    }
+
+}
+
